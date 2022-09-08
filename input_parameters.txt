@@ -1,0 +1,62 @@
+parameters["n"] = 21 
+parameters["m"] = 20 
+# parameters of solids
+parameters["m1"] = m1 
+parameters["I1"] = I1 
+parameters["m2"] = m2 
+parameters["I2"] = I2 
+parameters["m3"] = m3 
+parameters["I3"] = I3 
+parameters["m4"] = m4 
+parameters["I4"] = I4 
+parameters["m5"] = m5 
+parameters["I5"] = I5 
+parameters["m6"] = m6 
+parameters["I6"] = I6 
+parameters["m7"] = m7 
+parameters["I7"] = I7 
+
+# parameters of connections
+parameters["X5A1"] =  (A1[0]-x5_0)*cos(theta5_0)+(A1[-1]-y5_0)*sin(theta5_0) 
+parameters["Y5A1"] = -(A1[0]-x5_0)*sin(theta5_0)+(A1[-1]-y5_0)*cos(theta5_0) 
+parameters["X7A2"] =  (A2[0]-x7_0)*cos(theta7_0)+(A2[-1]-y7_0)*sin(theta7_0) 
+parameters["Y7A2"] = -(A2[0]-x7_0)*sin(theta7_0)+(A2[-1]-y7_0)*cos(theta7_0) 
+parameters["X1O"] =  (O[0]-x1_0)*cos(theta1_0)+(O[-1]-y1_0)*sin(theta1_0) 
+parameters["Y1O"] = -(O[0]-x1_0)*sin(theta1_0)+(O[-1]-y1_0)*cos(theta1_0) 
+parameters["X3B"] =  (B[0]-x3_0)*cos(theta3_0)+(B[-1]-y3_0)*sin(theta3_0) 
+parameters["Y3B"] = -(B[0]-x3_0)*sin(theta3_0)+(B[-1]-y3_0)*cos(theta3_0) 
+parameters["X4E"] =  (E[0]-x4_0)*cos(theta4_0)+(E[-1]-y4_0)*sin(theta4_0) 
+parameters["Y4E"] = -(E[0]-x4_0)*sin(theta4_0)+(E[-1]-y4_0)*cos(theta4_0) 
+parameters["X5E"] =  (E[0]-x5_0)*cos(theta5_0)+(E[-1]-y5_0)*sin(theta5_0) 
+parameters["Y5E"] = -(E[0]-x5_0)*sin(theta5_0)+(E[-1]-y5_0)*cos(theta5_0) 
+parameters["X6F"] =  (F[0]-x6_0)*cos(theta6_0)+(F[-1]-y6_0)*sin(theta6_0) 
+parameters["Y6F"] = -(F[0]-x6_0)*sin(theta6_0)+(F[-1]-y6_0)*cos(theta6_0) 
+parameters["X7F"] =  (F[0]-x7_0)*cos(theta7_0)+(F[-1]-y7_0)*sin(theta7_0) 
+parameters["Y7F"] = -(F[0]-x7_0)*sin(theta7_0)+(F[-1]-y7_0)*cos(theta7_0) 
+parameters["X1G"] =  (G[0]-x1_0)*cos(theta1_0)+(G[-1]-y1_0)*sin(theta1_0) 
+parameters["Y1G"] = -(G[0]-x1_0)*sin(theta1_0)+(G[-1]-y1_0)*cos(theta1_0) 
+parameters["X2G"] =  (G[0]-x2_0)*cos(theta2_0)+(G[-1]-y2_0)*sin(theta2_0) 
+parameters["Y2G"] = -(G[0]-x2_0)*sin(theta2_0)+(G[-1]-y2_0)*cos(theta2_0) 
+parameters["X2P1"] =  (P1[0]-x2_0)*cos(theta2_0)+(P1[-1]-y2_0)*sin(theta2_0) 
+parameters["Y2P1"] = -(P1[0]-x2_0)*sin(theta2_0)+(P1[-1]-y2_0)*cos(theta2_0) 
+parameters["X3P1"] =  (P1[0]-x3_0)*cos(theta3_0)+(P1[-1]-y3_0)*sin(theta3_0) 
+parameters["Y3P1"] = -(P1[0]-x3_0)*sin(theta3_0)+(P1[-1]-y3_0)*cos(theta3_0) 
+parameters["X2P2"] =  (P2[0]-x2_0)*cos(theta2_0)+(P2[-1]-y2_0)*sin(theta2_0) 
+parameters["Y2P2"] = -(P2[0]-x2_0)*sin(theta2_0)+(P2[-1]-y2_0)*cos(theta2_0) 
+parameters["X4P2"] =  (P2[0]-x4_0)*cos(theta4_0)+(P2[-1]-y4_0)*sin(theta4_0) 
+parameters["Y4P2"] = -(P2[0]-x4_0)*sin(theta4_0)+(P2[-1]-y4_0)*cos(theta4_0) 
+parameters["X2P3"] =  (P3[0]-x2_0)*cos(theta2_0)+(P3[-1]-y2_0)*sin(theta2_0) 
+parameters["Y2P3"] = -(P3[0]-x2_0)*sin(theta2_0)+(P3[-1]-y2_0)*cos(theta2_0) 
+parameters["X6P3"] =  (P3[0]-x6_0)*cos(theta6_0)+(P3[-1]-y6_0)*sin(theta6_0) 
+parameters["Y6P3"] = -(P3[0]-x6_0)*sin(theta6_0)+(P3[-1]-y6_0)*cos(theta6_0) 
+
+# parameters of intern forces
+
+# parameters of extern forces
+parameters["X3D"] = (D[0]-x3_0)*cos(theta3_0)+(D[1]-y3_0)*sin(theta3_0) 
+parameters["Y3D"] = -(D[0]-x3_0)*sin(theta3_0)+(D[1]-y3_0)*cos(theta3_0) 
+parameters["xC"] = C[0] 
+parameters["yC"] = C[1] 
+parameters["ka"] = ka 
+parameters["l0a"] = l0a 
+
