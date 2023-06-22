@@ -13,7 +13,7 @@ import h5py
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef csolve_dgesv(double[:,::1] A , double[::1] B):
+cdef csolve_dgesv(double[::1,:] A , double[::1] B):
 	
     cdef int N = A.shape[1]
     cdef int NRHS = 1
@@ -41,7 +41,7 @@ cdef csolve_dgesv(double[:,::1] A , double[::1] B):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)       
-cdef csolve_dgelsd(double[:,::1] A , double[::1] B):
+cdef csolve_dgelsd(double[::1,:] A , double[::1] B):
 	
     cdef int M = A.shape[0]
     cdef int N = A.shape[0]
@@ -98,16 +98,16 @@ cdef csolve_dgelsd(double[:,::1] A , double[::1] B):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef csolve_dgbsv(double[:,::1] A, double[::1] B, dict c_parameters):
+cdef csolve_dgbsv(double[::1,:] A, double[::1] B, dict c_parameters):
     
     cdef int[::1] perm = c_parameters["perm"]
     cdef int KL = c_parameters["KL"]
     cdef int KU = c_parameters["KU"]
     cdef int N = A.shape[0], i=0, j=0
     
-    cdef double[:,::1] Ap = np.zeros([N,N])
+    cdef double[::1,:] Ap = np.zeros([N,N])
     cdef double[::1] Bp = np.zeros([N])
-    cdef double[:,::1] AB = np.zeros([2*KL+KU+1,N])   
+    cdef double[::1,:] AB = np.zeros([2*KL+KU+1,N])   
 
     # permutation
     for i in range(N):
@@ -133,7 +133,7 @@ cdef csolve_dgbsv(double[:,::1] A, double[::1] B, dict c_parameters):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef csolve_dgels(double[:,::1] A , double[::1] B):
+cdef csolve_dgels(double[::1,:] A , double[::1] B):
     
     cdef char* TRANS = 'N'
     cdef int N = A.shape[1]
@@ -165,7 +165,7 @@ cdef csolve_dgels(double[:,::1] A , double[::1] B):
 @cython.wraparound(False)
 @cython.cdivision(True)
 cdef cstate_space_function(double ti,double[::1] X0, double[::1] X, double[::1] dX, dict c_parameters, double[:,::1] B, double[:,::1] C, double[:,::1] tB, double[:,::1] tC,
-    double[:,::1] A1, double[:,::1] A2, double[::1] ftot):
+    double[::1,:] A1, double[::1,:] A2, double[::1] ftot):
 	
 	# Simulation entries
     cdef double[:,::1] MA = c_parameters["MA"]
@@ -412,8 +412,8 @@ def RK4(t,X0,parameters,solver='dgesv'):
     X2=np.zeros([ntot])
     X3=np.zeros([ntot])
     X4=np.zeros([ntot])		
-    A1=np.zeros([2*n+m,2*n+m])	
-    A2=np.zeros([2*n+m,2*n+m])	
+    A1=np.zeros([2*n+m,2*n+m], order="F")	
+    A2=np.zeros([2*n+m,2*n+m], order="F")	
     ftot=np.zeros([2*n+m])	
     # Definition of memory_views 
     cdef double[:,::1] Xsol_v=Xsol
@@ -427,8 +427,8 @@ def RK4(t,X0,parameters,solver='dgesv'):
     cdef double[::1] X4_v=X4	
     cdef double[::1] X0_v=X0
     cdef double[::1] X1_v=X1
-    cdef double[:,::1] A1_v=A1
-    cdef double[:,::1] A2_v=A2
+    cdef double[::1,:] A1_v=A1
+    cdef double[::1,:] A2_v=A2
     cdef double[::1] ftot_v=ftot
     
     # Definition of constraint matrix 
@@ -546,8 +546,8 @@ def RK45(t,X0,parameters,solver='dgesv'):
     cdef double[::1] X6_v=X6	
     cdef double[::1] X0_v=X0
     cdef double[::1] X1_v=X1
-    cdef double[:,::1] A1_v=A1
-    cdef double[:,::1] A2_v=A2
+    cdef double[::1,:] A1_v=A1
+    cdef double[::1,:] A2_v=A2
     cdef double[::1] ftot_v=ftot
     
     B = np.zeros([m,n])
