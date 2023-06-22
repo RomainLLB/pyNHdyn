@@ -391,8 +391,8 @@ def RK45(t,X0,parameters,solver='dgesv'):
     X4=np.zeros([ntot])
     X5=np.zeros([ntot])	
     X6=np.zeros([ntot])	    
-    A1=np.zeros([2*n+m,2*n+m])	
-    A2=np.zeros([2*n+m,2*n+m])	
+    A1=np.zeros([2*n+m,2*n+m], order="F")	
+    A2=np.zeros([2*n+m,2*n+m], order="F")	
     ftot=np.zeros([2*n+m])	
     cdef double[:,::1] Xsol_v=Xsol
     cdef double[:,::1] dXsol_v=dXsol
