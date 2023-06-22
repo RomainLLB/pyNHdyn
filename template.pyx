@@ -104,10 +104,16 @@ cdef csolve_dgbsv(double[::1,:] A, double[::1] B, dict c_parameters):
     cdef int KL = c_parameters["KL"]
     cdef int KU = c_parameters["KU"]
     cdef int N = A.shape[0], i=0, j=0
+    cdef int NRHS = 1
+    cdef int LDB = N
+    cdef int info = 0   
     
-    cdef double[::1,:] Ap = np.zeros([N,N])
+    cdef double[::1,:] Ap = np.zeros([N,N],order="F")
     cdef double[::1] Bp = np.zeros([N])
-    cdef double[::1,:] AB = np.zeros([2*KL+KU+1,N])   
+    cdef double[::1,:] AB = np.zeros([2*KL+KU+1,N],order="F")   
+    cdef int LDAB = 2*KL+KU+1
+    
+    cdef int* piv_pointer = <int*>malloc(sizeof(int)*N)
 
     # permutation
     for i in range(N):
@@ -119,10 +125,17 @@ cdef csolve_dgbsv(double[::1,:] A, double[::1] B, dict c_parameters):
     for j in range(1,N+1):   
         for i in range(max(1,j-KU),min(N,j+KL)+1):
             AB[KU + KL + i - j , j-1] = Ap[i-1,j-1]
-    
-    # solve
-    scipy.linalg.lapack.dgbsv(KL, KU, AB[:,:], Bp[:], overwrite_ab=1, overwrite_b=1)
-    
+
+    try:
+        scipy.linalg.cython_lapack.dgbsv(&N,&KL,&KU,&NRHS,&AB[0,0],&LDAB,piv_pointer,&Bp[0],&LDB,&info)	
+        if info!=0:
+            raise NameError('error in dgbsv')
+    except NameError:
+        raise NameError('error in dgbsv')
+        
+    finally:
+        free(piv_pointer)
+        
     for i in range(N):
         B[perm[i]] = Bp[i]
     
